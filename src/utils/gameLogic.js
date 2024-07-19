@@ -57,9 +57,29 @@ export const initializeGrid = () => {
   let grid = Array(GRID_SIZE).fill().map(() => Array(GRID_SIZE).fill(''));
   solveSudoku(grid);
 
-  // Add mines randomly
-  return grid.map(row => row.map(letter => ({
-    letter,
-    hasMine: Math.random() < 0.2 // 20% chance of having a mine
-  })));
+  // Add a single mine randomly
+  const mineRow = Math.floor(Math.random() * GRID_SIZE);
+  const mineCol = Math.floor(Math.random() * GRID_SIZE);
+
+  return grid.map((row, rowIndex) => 
+    row.map((letter, colIndex) => ({
+      letter,
+      hasMine: rowIndex === mineRow && colIndex === mineCol
+    }))
+  );
+};
+
+export const getColorForLetter = (letter) => {
+  const colors = {
+    'A': 'bg-red-200',
+    'B': 'bg-blue-200',
+    'C': 'bg-green-200',
+    'D': 'bg-yellow-200',
+    'E': 'bg-purple-200',
+    'F': 'bg-pink-200',
+    'G': 'bg-indigo-200',
+    'H': 'bg-orange-200',
+    'I': 'bg-teal-200'
+  };
+  return colors[letter] || 'bg-gray-200';
 };

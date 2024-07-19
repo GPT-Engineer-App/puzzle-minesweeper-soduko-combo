@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { cn } from "@/lib/utils";
+import { getColorForLetter } from '../utils/gameLogic';
 
 const Tile = ({ letter, hasMine, row, col, grid }) => {
   const [isShaking, setIsShaking] = useState(false);
@@ -35,6 +36,7 @@ const Tile = ({ letter, hasMine, row, col, grid }) => {
     <div
       className={cn(
         "w-10 h-10 flex items-center justify-center border border-gray-300 text-lg font-bold cursor-pointer",
+        getColorForLetter(letter),
         isShaking && "animate-shake"
       )}
       onMouseEnter={handleMouseEnter}
